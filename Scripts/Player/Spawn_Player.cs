@@ -17,7 +17,7 @@ public class Spawn_Player : MonoBehaviour
 
     void Spawn_player()
     {
-        Instantiate(Player, Start_location.transform.position + new Vector3(2, 0), Start_location.transform.rotation);
+        Instantiate(Player, Start_location.transform.position, Start_location.transform.rotation);
     }
 
 }

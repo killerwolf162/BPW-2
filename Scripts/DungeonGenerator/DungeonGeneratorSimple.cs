@@ -111,6 +111,7 @@ namespace SimpleDungeon
 
         }
 
+        //how to make width of connector 2??
         public void ConnectRooms(Room _roomOne, Room _roomTwo)
         {
             Vector3Int posOne = _roomOne.GetCenter();
