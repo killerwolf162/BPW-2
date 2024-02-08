@@ -6,48 +6,21 @@ using UnityEngine.InputSystem;
 public class Player_movement : MonoBehaviour
 {
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            move_forward();
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            move_backward();
-        }
-        else if ( Input.GetKeyDown(KeyCode.A))
-        {
-            move_left();
-        }
-        else if ( Input.GetKeyDown(KeyCode.D))
-        {
-            move_right();
-        }
+    private Rigidbody rig;
+    public float speed = 1f;
 
+    private void Awake()
+    {
+        rig = GetComponent<Rigidbody>();
     }
 
-
-    private void move_right()
+    void FixedUpdate()
     {
-        transform.position = transform.position + new Vector3(1, 0, 0);
-    }
 
-    private void move_left()
-    {
-        transform.position = transform.position + new Vector3(-1, 0, 0);
-    }
+        Vector3 m_input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-    private void move_forward()
-    {
-        transform.position = transform.position + new Vector3(0, 0, 1);
+        rig.MovePosition(transform.position + m_input * Time.deltaTime * speed);
     }
-
-    private void move_backward()
-    {
-        transform.position = transform.position + new Vector3(-0, 0, -1);
-    }
-
 
 
 }
