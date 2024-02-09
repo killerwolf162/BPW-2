@@ -206,33 +206,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 162860, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5277774617013706329}
+    - targetCorrespondingSourceObject: {fileID: 120490, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8844826504297457718}
     - targetCorrespondingSourceObject: {fileID: 142684, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6678183264089853318}
     - targetCorrespondingSourceObject: {fileID: 171852, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4387589800114753926}
-    - targetCorrespondingSourceObject: {fileID: 128700, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7797306392634551351}
   m_SourcePrefab: {fileID: 100100000, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
 --- !u!4 &5254409814049735156 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 487758, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
   m_PrefabInstance: {fileID: 5254409814049927354}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5254409814049834502 stripped
+--- !u!1 &5254409814049842704 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 128700, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 120490, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}
   m_PrefabInstance: {fileID: 5254409814049927354}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7797306392634551351
+--- !u!65 &8844826504297457718
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254409814049834502}
+  m_GameObject: {fileID: 5254409814049842704}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -245,8 +245,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 184.38089, y: 28.691183, z: 38.655285}
-  m_Center: {x: -9.898648, y: 13.845828, z: 1.9015144}
+  m_Size: {x: 73.169106, y: 179.16846, z: 37.194687}
+  m_Center: {x: -2.3168058, y: 97.856094, z: -6.368008}
 --- !u!1 &5254409814050025462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 171852, guid: 880858dfd9b1e784e89d45242bf78d2b, type: 3}

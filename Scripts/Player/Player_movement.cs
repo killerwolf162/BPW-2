@@ -22,12 +22,14 @@ public class Player_movement : MonoBehaviour
         Vector3 m_input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         rig.MovePosition(transform.position + m_input * Time.deltaTime * speed);
+    }
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+    private void Update()
+    {
+        if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0 || Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
             animator.SetBool("IsWalking", true);
         else
             animator.SetBool("IsWalking", false);
     }
-
 
 }
