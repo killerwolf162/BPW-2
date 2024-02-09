@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959d6740e5ab38b4eb34c2549b57c315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorPrefab: {fileID: 138890, guid: f84507d8111aabf4c9b10e2297b3a4d3, type: 3}
+  floorPrefab: {fileID: 184820, guid: 9e2131326fc97464987f58ebcb08832a, type: 3}
   wallPrefab: {fileID: 192550, guid: 3bf01e09059dad54b985779213d8dca8, type: 3}
   gridWidth: 100
   gridHeight: 100
