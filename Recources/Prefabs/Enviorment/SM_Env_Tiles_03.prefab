@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3337434}
   - component: {fileID: 2357334}
   - component: {fileID: 65931391419297118}
-  - component: {fileID: 1004590893625871533}
+  - component: {fileID: -6708249523540025682}
   m_Layer: 0
   m_Name: SM_Env_Tiles_03
   m_TagString: Wall
@@ -101,12 +101,12 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 5.138054, y: 0.11979329, z: 4.999999}
   m_Center: {x: -2.532177, y: 0.04926302, z: 2.4999995}
---- !u!54 &1004590893625871533
+--- !u!54 &-6708249523540025682
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
