@@ -248,11 +248,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorPrefab: {fileID: 138890, guid: f84507d8111aabf4c9b10e2297b3a4d3, type: 3}
   wallPrefab: {fileID: 192550, guid: 3bf01e09059dad54b985779213d8dca8, type: 3}
-  gridWidth: 200
-  gridHeight: 200
-  minRoomSize: 10
-  maxRoomSize: 15
-  numRooms: 10
+  gridWidth: 100
+  gridHeight: 100
+  minRoomSize: 3
+  maxRoomSize: 8
+  numRooms: 15
   allInstantiatedPrefabs: []
 --- !u!1 &1816832593
 GameObject:
