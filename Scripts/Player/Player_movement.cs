@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 public class Player_movement : MonoBehaviour
 {
 
-    private Rigidbody rig;
+    private Rigidbody2D rig;
     private Animator animator;
     public float speed = 1f;
     Vector3 player_pos;
 
     private void Awake()
     {
-        rig = GetComponent<Rigidbody>();
+        rig = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
