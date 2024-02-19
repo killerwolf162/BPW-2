@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Tile_map_visualizer : MonoBehaviour
+public class TileMapVisualizer : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap floor_tile_map;
+    private Tilemap floor_tile_map, wall_tile_map;
     [SerializeField]
-    private TileBase floor_tile;
+    private TileBase floor_tile, wall_tile;
 
     public void paint_floor_tiles(IEnumerable<Vector2Int> floor_positions)
     {
         paint_floor_tiles(floor_positions, floor_tile_map, floor_tile);
+    }
+
+    internal void paint_single_basic_wall(Vector2Int position)
+    {
+        paint_tile(wall_tile_map, wall_tile, position);
     }
 
     private void paint_floor_tiles(IEnumerable<Vector2Int> floor_positions, Tilemap floor_tile_map, TileBase floor_tile)
@@ -33,6 +38,7 @@ public class Tile_map_visualizer : MonoBehaviour
     public void Clear()
     {
         floor_tile_map.ClearAllTiles();
+        wall_tile_map.ClearAllTiles();
     }
 
 }

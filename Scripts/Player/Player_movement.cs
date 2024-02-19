@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,68 +7,43 @@ using UnityEngine.InputSystem;
 public class Player_movement : MonoBehaviour
 {
 
-    private Rigidbody2D rig;
-    private Animator animator;
-    public float speed = 1f;
-    Vector3 player_pos;
+    public float treshold = 0.5f;
 
-    private void Awake()
+    private GameObject selected_object;
+
+    private FlashFeedback flash_feedback;
+
+    public void handle_movement(Vector3 end_position)
     {
-        rig = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-    }
+        if (selected_object == null)
+            return;
 
-    private void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.D))
-            move_right();
-        else if (Input.GetKeyDown(KeyCode.A))
-            move_left();
-        else if (Input.GetKeyDown(KeyCode.W))
-            move_forward();
-        else if (Input.GetKeyDown(KeyCode.S))
-            move_backward();
-
-        /*if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0 || Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
-            animator.SetBool("IsWalking", true);
-        else
-            animator.SetBool("IsWalking", false);
-        */
-    }
-
-    public void move_right()
-    {
-        rig.MovePosition(transform.position + new Vector3(1, 0, 0));
-    }
-
-    public void move_left()
-    {
-        rig.MovePosition(transform.position + new Vector3(-1, 0, 0));
-    }
-
-    public void move_forward()
-    {
-        rig.MovePosition(transform.position + new Vector3(0, 0, 1));
-    }
-
-    public void move_backward()
-    {
-        rig.MovePosition(transform.position + new Vector3(0, 0, -1));
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.CompareTag("Wall") && Input.GetKey(KeyCode.D))
-            rig.MovePosition(transform.position + new Vector3(-1, 0, 0));
-        else if (other.gameObject.CompareTag("Wall") && Input.GetKey(KeyCode.A))
-            rig.MovePosition(transform.position + new Vector3(1, 0, 0));
-        else if (other.gameObject.CompareTag("Wall") && Input.GetKey(KeyCode.W))
-            rig.MovePosition(transform.position + new Vector3(0, 0, -1));
-        else if (other.gameObject.CompareTag("Wall") && Input.GetKey(KeyCode.S))
-            rig.MovePosition(transform.position + new Vector3(0, 0, 1));
+        flash_feedback.stop_feedback();
         
+        if (Vector2.Distance(end_position, selected_object.transform.position) > treshold)
+        {
+            Vector2 direction = (end_position - selected_object.transform.position);
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                float sign = Mathf.Sign(direction.x);
+                direction = Vector2.right * sign;
+            }
+            else
+            {
+                float sign = Mathf.Sign(direction.y);
+                direction = Vector2.up * sign;
+            }
+            selected_object.transform.position += (Vector3)direction;
+        }
     }
 
+    public void handle_selection(GameObject detected_object)
+    {
+        if (detected_object != null)
+        {
+            this.selected_object = detected_object;
+            flash_feedback = selected_object.GetComponent<FlashFeedback>();
+            flash_feedback.play_feedback();
+        }
+    }
 }
