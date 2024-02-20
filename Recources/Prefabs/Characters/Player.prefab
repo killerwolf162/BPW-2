@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5409030937761678439}
   - component: {fileID: 2605455341882786451}
   - component: {fileID: 2330408463260458297}
+  - component: {fileID: -2677730343105736691}
+  - component: {fileID: 2413736705143572505}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -177,3 +179,29 @@ MonoBehaviour:
   sprite_renderer: {fileID: 6258329860268263181}
   invisable_time: 0.1
   visable_time: 0.3
+--- !u!114 &-2677730343105736691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162446227072938767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb08593525f040145855a08a0238bc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_movement_points: 2
+  current_movement_points: 0
+--- !u!114 &2413736705143572505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162446227072938767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc59002fa5b317469597bf941345146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

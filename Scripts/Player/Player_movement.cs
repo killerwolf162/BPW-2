@@ -9,20 +9,19 @@ public class Player_movement : MonoBehaviour
 
     public float treshold = 0.5f;
 
-    private GameObject selected_object;
-
-    private FlashFeedback flash_feedback;
+    private Unit selected_unit;
 
     public void handle_movement(Vector3 end_position)
     {
-        if (selected_object == null)
+        if (this.selected_unit == null)
             return;
 
-        flash_feedback.stop_feedback();
-        
-        if (Vector2.Distance(end_position, selected_object.transform.position) > treshold)
+        if (this.selected_unit.can_still_move() == false)
+            return;
+
+        if (Vector2.Distance(end_position, this.selected_unit.transform.position) > treshold)
         {
-            Vector2 direction = (end_position - selected_object.transform.position);
+            Vector2 direction = (end_position - this.selected_unit.transform.position);
             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
                 float sign = Mathf.Sign(direction.x);
@@ -33,17 +32,15 @@ public class Player_movement : MonoBehaviour
                 float sign = Mathf.Sign(direction.y);
                 direction = Vector2.up * sign;
             }
-            selected_object.transform.position += (Vector3)direction;
+            this.selected_unit.handle_movement(direction, 1);
         }
     }
 
     public void handle_selection(GameObject detected_object)
     {
-        if (detected_object != null)
-        {
-            this.selected_object = detected_object;
-            flash_feedback = selected_object.GetComponent<FlashFeedback>();
-            flash_feedback.play_feedback();
-        }
+        if (detected_object == null)
+            return;
+
+        this.selected_unit = detected_object.GetComponent<Unit>();
     }
 }
