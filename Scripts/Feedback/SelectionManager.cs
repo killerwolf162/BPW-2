@@ -16,7 +16,8 @@ public class SelectionManager : MonoBehaviour, ITurnDependant
             return;
 
         flash_feed_back = detected_colider.GetComponent<FlashFeedback>();
-        flash_feed_back.play_feedback();
+        if (flash_feed_back != null)
+            flash_feed_back.play_feedback();
     }
 
     public void wait_turn()

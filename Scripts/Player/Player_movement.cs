@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 public class Player_movement : MonoBehaviour
 {
 
+    [SerializeField]
+    private Map map;
+
+
     public float treshold = 0.5f;
 
     private Unit selected_unit;
@@ -21,19 +25,36 @@ public class Player_movement : MonoBehaviour
 
         if (Vector2.Distance(end_position, this.selected_unit.transform.position) > treshold)
         {
-            Vector2 direction = (end_position - this.selected_unit.transform.position);
-            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            Vector2 direction = calculate_movement(end_position);
+
+            if(map.can_i_move_to((Vector2)this.selected_unit.transform.position, direction))
             {
-                float sign = Mathf.Sign(direction.x);
-                direction = Vector2.right * sign;
+                this.selected_unit.handle_movement(direction, 1);
             }
             else
             {
-                float sign = Mathf.Sign(direction.y);
-                direction = Vector2.up * sign;
+                Debug.Log($"cant move in direction {direction}");
             }
-            this.selected_unit.handle_movement(direction, 1);
+
+            
         }
+    }
+
+    private Vector2 calculate_movement(Vector3 end_position)
+    {
+        Vector2 direction = (end_position - this.selected_unit.transform.position);
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            float sign = Mathf.Sign(direction.x);
+            direction = Vector2.right * sign;
+        }
+        else
+        {
+            float sign = Mathf.Sign(direction.y);
+            direction = Vector2.up * sign;
+        }
+
+        return direction;
     }
 
     public void handle_selection(GameObject detected_object)
