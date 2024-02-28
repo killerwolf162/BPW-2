@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTurnTaker : MonoBehaviour
+public class TurnTaker : MonoBehaviour
 {
 
     public void wait_turn()

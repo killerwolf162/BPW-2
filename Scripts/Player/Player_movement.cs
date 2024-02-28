@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,12 @@ public class Player_movement : MonoBehaviour
     public float treshold = 0.5f;
 
     private Unit selected_unit;
+
+    private List<Vector2Int> movement_range;
+
+    [SerializeField]
+    private MovementRangeHighlight range_highlight;
+
 
     public void handle_movement(Vector3 end_position)
     {
@@ -30,6 +37,14 @@ public class Player_movement : MonoBehaviour
             if(map.can_i_move_to((Vector2)this.selected_unit.transform.position, direction))
             {
                 this.selected_unit.handle_movement(direction, 1);
+                if(this.selected_unit.can_still_move())
+                {
+                    prepare_movement_range();
+                }
+                else
+                {
+                    range_highlight.clear_highlight();
+                }
             }
             else
             {
@@ -59,16 +74,37 @@ public class Player_movement : MonoBehaviour
 
     public void handle_selection(GameObject detected_object)
     {
+
         if (detected_object == null)
+        {
+            reset_character_movement();
             return;
+        }
 
         this.selected_unit = detected_object.GetComponent<Unit>();
-        Dictionary<Vector2Int, Vector2Int?> result
-            = map.get_movement_range(this.selected_unit.transform.position, this.selected_unit.Current_movement_points);
 
-        foreach (Vector2Int position in result.Keys)
-        {
-            Debug.Log(position);
-        }
+        if (this.selected_unit == null)
+            return;
+
+        if (this.selected_unit.can_still_move())
+            prepare_movement_range();
+        else
+            range_highlight.clear_highlight();
+        //foreach (Vector2Int position in movement_range)
+        //{
+        //    Debug.Log(position);
+        //}
+    }
+
+    private void prepare_movement_range()
+    {
+        movement_range = map.get_movement_range(this.selected_unit.transform.position, this.selected_unit.Current_movement_points).Keys.ToList();
+        range_highlight.highlight_tiles(movement_range);
+    }
+
+    private void reset_character_movement()
+    {
+        range_highlight.clear_highlight();
+        this.selected_unit = null;
     }
 }

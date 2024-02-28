@@ -13,7 +13,7 @@ public class TurnManager : MonoBehaviour
         Debug.Log("Waiting..");
         on_block_player_input?.Invoke();
 
-        foreach (PlayerTurnTaker turn_taker in FindObjectsOfType<PlayerTurnTaker>())
+        foreach (TurnTaker turn_taker in FindObjectsOfType<TurnTaker>())
         {
             turn_taker.wait_turn();
             Debug.Log($"Unit {turn_taker.name} is waiting");
