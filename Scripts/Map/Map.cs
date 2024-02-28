@@ -18,6 +18,13 @@ public class Map : MonoBehaviour
     private MapGrid map_grid;
 
 
+    public Dictionary<Vector2Int, Vector2Int?> get_movement_range(Vector3 world_position, int current_movement_points)
+    {
+        Vector3Int cell_world_position = get_cell_world_position_for(world_position);
+        return GraphSearch.BFS(map_grid, (Vector2Int)cell_world_position, current_movement_points);
+    }
+
+
     private void Awake()
     {
         floor_tiles = get_world_position_tiles_from(floor_tilemap);
@@ -60,6 +67,11 @@ public class Map : MonoBehaviour
 
 
         return neighbours.Contains(unit_tile_position); 
+    }
+
+    private Vector3Int get_cell_world_position_for(Vector3 world_position)
+    {
+        return Vector3Int.CeilToInt(floor_tilemap.CellToWorld(floor_tilemap.WorldToCell(world_position)));
     }
 
     private Vector3Int get_world_position(Vector2Int cell_position)

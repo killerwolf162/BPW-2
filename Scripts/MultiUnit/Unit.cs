@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour, ITurnDependant
     [SerializeField]
     private int current_movement_points;
 
+    public int Current_movement_points { get => current_movement_points;}
 
     void Start()
     {

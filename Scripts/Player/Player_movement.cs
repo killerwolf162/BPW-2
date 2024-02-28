@@ -63,5 +63,12 @@ public class Player_movement : MonoBehaviour
             return;
 
         this.selected_unit = detected_object.GetComponent<Unit>();
+        Dictionary<Vector2Int, Vector2Int?> result
+            = map.get_movement_range(this.selected_unit.transform.position, this.selected_unit.Current_movement_points);
+
+        foreach (Vector2Int position in result.Keys)
+        {
+            Debug.Log(position);
+        }
     }
 }
