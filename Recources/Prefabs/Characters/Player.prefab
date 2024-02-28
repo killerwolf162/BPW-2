@@ -137,6 +137,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_movement_points: 5
   current_movement_points: 0
+  turn_manager: {fileID: 0}
+  enemy_detection_layer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1874649107644899115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,5 +215,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnDie:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2805300152382815373}
+        m_TargetAssemblyTypeName: Unit, Assembly-CSharp
+        m_MethodName: game_over
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   health: 10

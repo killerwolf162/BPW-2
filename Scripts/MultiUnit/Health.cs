@@ -23,4 +23,9 @@ public class Health : MonoBehaviour
 
     }
 
+    public void destroy_unit()
+    {
+        Destroy(gameObject);
+    }
+
 }

@@ -16,5 +16,10 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
         generate();
     }
 
+    public void clear_dungeon()
+    {
+        tile_map_visualizer.Clear();
+    }
+
     protected abstract void generate();
 }

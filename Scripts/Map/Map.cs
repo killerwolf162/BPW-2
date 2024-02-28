@@ -27,6 +27,11 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
+        generate_map();
+    }
+
+    public void generate_map()
+    {
         floor_tiles = get_world_position_tiles_from(floor_tilemap);
         wall_tiles = get_world_position_tiles_from(wall_tilemap);
 

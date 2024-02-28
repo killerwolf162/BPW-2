@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Unit : MonoBehaviour, ITurnDependant
 {
@@ -13,7 +14,6 @@ public class Unit : MonoBehaviour, ITurnDependant
     [SerializeField]
     private int current_movement_points;
 
-    [SerializeField]
     TurnManager turn_manager;
 
     public int Current_movement_points { get => current_movement_points;}
@@ -63,16 +63,23 @@ public class Unit : MonoBehaviour, ITurnDependant
 
     }
 
+    public void game_over()
+    {
+        SceneManager.LoadScene("Game_Over");
+    }
+
+
 
     // eventually change to an attack window where player can choose different weapons to perform attack with if player has these weapons
     // player then chooses weapon, weapon range will be highlighted.
     //  if enemy is inside highlight(weapon) range and player clicks on enemy, attack with said weapon is performed.
     // also make it so damage is tied to equiped weapon that deals a random value between 2 parameters
+    // also make it so there are seperate action and movement points. For now this works
 
     private void perform_attack(Health health)
     {
-        health.get_hit(1);
-        current_movement_points -= 2;
+        health.get_hit(1); // changes this so it corresponds to weapon damge
+        current_movement_points = 0;
     }
 
     private GameObject check_if_enemy_in_direction(Vector3 cardinal_direction)
