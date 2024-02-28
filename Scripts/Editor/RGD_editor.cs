@@ -13,8 +13,7 @@ public class RGD_editor : Editor
 
     private void Awake()
     {
-        generator = (AbstractDungeonGenerator)target;
-        
+        generator = (AbstractDungeonGenerator)target;      
     }
 
     public override void OnInspectorGUI()
