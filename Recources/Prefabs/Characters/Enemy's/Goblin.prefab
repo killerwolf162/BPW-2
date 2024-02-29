@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 4598532957122994025}
   - component: {fileID: -4513030250516973888}
   - component: {fileID: 3779671496175088138}
+  - component: {fileID: -6086595208836788318}
   m_Layer: 8
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,3 +195,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: 3
+--- !u!114 &-6086595208836788318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072382833360715818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb08593525f040145855a08a0238bc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_movement_points: 5
+  current_movement_points: 0
+  attack_range: 1
+  enemy_detection_layer:
+    serializedVersion: 2
+    m_Bits: 0

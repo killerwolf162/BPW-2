@@ -14,9 +14,13 @@ public class Unit : MonoBehaviour, ITurnDependant
     [SerializeField]
     private int current_movement_points;
 
+    [SerializeField]
+    private int attack_range;
+
     TurnManager turn_manager;
 
     public int Current_movement_points { get => current_movement_points;}
+    public int Attack_range { get => attack_range;}
 
     [SerializeField]
     private LayerMask enemy_detection_layer;
@@ -51,15 +55,13 @@ public class Unit : MonoBehaviour, ITurnDependant
             current_movement_points -= move_cost;
             transform.position += (Vector3)cardinal_direction;
         }
-        else
-        {
-            perform_attack(enemy_unit.GetComponent<Health>());
-        }
+        //else
+        //{
+        //    perform_attack(enemy_unit.GetComponent<Health>());
+        //}
 
         if (current_movement_points <= 0)
             turn_manager.next_turn();
-
-
 
     }
 
@@ -68,7 +70,16 @@ public class Unit : MonoBehaviour, ITurnDependant
         SceneManager.LoadScene("Game_Over");
     }
 
-
+    public void handle_attack(Vector3 cardinal_direction)
+    {
+        GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
+        if (enemy_unit == null)
+            return;
+        else
+        {
+            perform_attack(enemy_unit.GetComponent<Health>());
+        }
+    }
 
     // eventually change to an attack window where player can choose different weapons to perform attack with if player has these weapons
     // player then chooses weapon, weapon range will be highlighted.

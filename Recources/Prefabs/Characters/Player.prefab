@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max_movement_points: 5
   current_movement_points: 0
-  turn_manager: {fileID: 0}
+  attack_range: 1
   enemy_detection_layer:
     serializedVersion: 2
     m_Bits: 256

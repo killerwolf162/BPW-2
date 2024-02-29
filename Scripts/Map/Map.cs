@@ -24,6 +24,11 @@ public class Map : MonoBehaviour
         return GraphSearch.BFS(map_grid, (Vector2Int)cell_world_position, current_movement_points);
     }
 
+    public Dictionary<Vector2Int, Vector2Int?> get_attack_range(Vector3 world_position, int attack_range)
+    {
+        Vector3Int cell_world_position = get_cell_world_position_for(world_position);
+        return GraphSearch.BFS(map_grid, (Vector2Int)cell_world_position, attack_range);
+    }
 
     private void Awake()
     {
