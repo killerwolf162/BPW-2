@@ -11,13 +11,15 @@ GameObject:
   - component: {fileID: 5491385049324605104}
   - component: {fileID: 328243237776148529}
   - component: {fileID: 445388620970828594}
-  - component: {fileID: 4598532957122994025}
   - component: {fileID: -4513030250516973888}
   - component: {fileID: 3779671496175088138}
   - component: {fileID: -6086595208836788318}
+  - component: {fileID: 6663807093797417982}
+  - component: {fileID: -8105944520342780370}
+  - component: {fileID: 1958391704317075134}
   m_Layer: 8
   m_Name: Goblin
-  m_TagString: enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,18 +112,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4598532957122994025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4072382833360715818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc59002fa5b317469597bf941345146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-4513030250516973888
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +185,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: 3
+  hitFX: {fileID: 4779731693080456059, guid: ddddc11409e59e14fa6571b6fa16cc01, type: 3}
+  missFX: {fileID: 361566441568871259, guid: fb0a97219969e944dacceedd2b91dd03, type: 3}
 --- !u!114 &-6086595208836788318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +202,48 @@ MonoBehaviour:
   max_movement_points: 5
   current_movement_points: 0
   attack_range: 1
+  dexterity: 5
+  armour_value: 0
   enemy_detection_layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+--- !u!114 &6663807093797417982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072382833360715818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7115c70d2cf9ce344860a8669f4168f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selection_feedback: {fileID: 0}
+--- !u!114 &-8105944520342780370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072382833360715818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec8a06c19f08ce4bb1b8e44b9b04eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1958391704317075134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072382833360715818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39f552768ea17d45850856100f43a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite_renderer: {fileID: 328243237776148529}
+  invisable_time: 0.1
+  visable_time: 0.2

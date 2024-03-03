@@ -70,10 +70,10 @@ public class Map : MonoBehaviour
 
         List<Vector2Int> neighbours = map_grid.get_neighbours_for(Vector2Int.FloorToInt(unit_position));
 
-        foreach( Vector2Int cell_position in neighbours)
-        {
-            Debug.Log(cell_position);
-        }
+        //foreach( Vector2Int cell_position in neighbours)
+        //{
+        //    Debug.Log(cell_position);
+        //}
 
 
         return neighbours.Contains(unit_tile_position); 

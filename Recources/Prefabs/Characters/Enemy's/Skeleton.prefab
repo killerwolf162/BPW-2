@@ -11,13 +11,15 @@ GameObject:
   - component: {fileID: 4259273019588147107}
   - component: {fileID: 1025852545962502387}
   - component: {fileID: 4138376414833244512}
-  - component: {fileID: -3720782437423226846}
   - component: {fileID: 6923747459327232541}
   - component: {fileID: 3236356368054434331}
   - component: {fileID: -2607229652028167984}
+  - component: {fileID: 6662991620122823609}
+  - component: {fileID: -2937304438553117932}
+  - component: {fileID: -1123871983986505042}
   m_Layer: 8
   m_Name: Skeleton
-  m_TagString: enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,18 +112,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-3720782437423226846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5087016111095831781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc59002fa5b317469597bf941345146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &6923747459327232541
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +185,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: 4
+  hitFX: {fileID: 4779731693080456059, guid: ddddc11409e59e14fa6571b6fa16cc01, type: 3}
+  missFX: {fileID: 361566441568871259, guid: fb0a97219969e944dacceedd2b91dd03, type: 3}
 --- !u!114 &-2607229652028167984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +202,48 @@ MonoBehaviour:
   max_movement_points: 4
   current_movement_points: 0
   attack_range: 1
+  dexterity: 3
+  armour_value: 1
   enemy_detection_layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+--- !u!114 &6662991620122823609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087016111095831781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7115c70d2cf9ce344860a8669f4168f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selection_feedback: {fileID: 0}
+--- !u!114 &-2937304438553117932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087016111095831781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec8a06c19f08ce4bb1b8e44b9b04eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1123871983986505042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087016111095831781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39f552768ea17d45850856100f43a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite_renderer: {fileID: 1025852545962502387}
+  invisable_time: 0.1
+  visable_time: 0.2

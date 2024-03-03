@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Player_attack : MonoBehaviour
 {
+  
+    //trying to seperate attack and movement into 2 different scripts. This isnt working right now.
+    //for now attack and movement are handeld in Player_movement script
 
     [SerializeField]
     private Map map;
@@ -29,7 +32,7 @@ public class Player_attack : MonoBehaviour
 
             if (map.can_i_move_to((Vector2)this.selected_unit.transform.position, direction))
             {
-                this.selected_unit.handle_attack(direction);
+                //this.selected_unit.handle_attack(direction); otherwise error in console wouldnt go away
                 if (this.selected_unit.can_still_move())
                 {
                     prepare_attack_range();

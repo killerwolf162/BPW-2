@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Unit : MonoBehaviour, ITurnDependant
 {
@@ -18,6 +19,13 @@ public class Unit : MonoBehaviour, ITurnDependant
     private int attack_range;
 
     TurnManager turn_manager;
+
+    [SerializeField]
+    private int dexterity;
+
+    [SerializeField]
+    private int armour_value;
+
 
     public int Current_movement_points { get => current_movement_points;}
     public int Attack_range { get => attack_range;}
@@ -55,30 +63,37 @@ public class Unit : MonoBehaviour, ITurnDependant
             current_movement_points -= move_cost;
             transform.position += (Vector3)cardinal_direction;
         }
-        //else
-        //{
-        //    perform_attack(enemy_unit.GetComponent<Health>());
-        //}
+        else
+        {
+            int RNG_attacker = Random.Range(1, 10); // attackrol attacker
+            int RNG_defender = Random.Range(1, 10); // defencerol defender
 
-        if (current_movement_points <= 0)
-            turn_manager.next_turn();
+            Debug.Log("Attacker rol");
+            Debug.Log(RNG_attacker + dexterity);
+            Debug.Log("Defender roll");
+            Debug.Log(RNG_defender + enemy_unit.GetComponent<Unit>().dexterity);
+
+            if (RNG_attacker + dexterity > enemy_unit.GetComponent<Unit>().dexterity + RNG_defender) // if attackrol + dex of attacker is higher than defence rol + dex defender, attack hits
+            {
+                perform_attack(enemy_unit.GetComponent<Health>());
+            }
+            else if (RNG_attacker + dexterity < enemy_unit.GetComponent<Unit>().dexterity + RNG_defender)
+            {
+                perform_dodge(enemy_unit.GetComponent<Health>());
+            }
+
+            current_movement_points = 0;
+
+        }
+
+        //if (current_movement_points <= 0)
+        //    turn_manager.next_turn();
 
     }
 
     public void game_over()
     {
         SceneManager.LoadScene("Game_Over");
-    }
-
-    public void handle_attack(Vector3 cardinal_direction)
-    {
-        GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
-        if (enemy_unit == null)
-            return;
-        else
-        {
-            perform_attack(enemy_unit.GetComponent<Health>());
-        }
     }
 
     // eventually change to an attack window where player can choose different weapons to perform attack with if player has these weapons
@@ -89,8 +104,13 @@ public class Unit : MonoBehaviour, ITurnDependant
 
     private void perform_attack(Health health)
     {
-        health.get_hit(1); // changes this so it corresponds to weapon damge
+
+        health.get_hit(Random.Range(1,2)); // changes this so it corresponds to weapon damge
         current_movement_points = 0;
+    }
+    private void perform_dodge(Health health)
+    {
+        health.dodge_attack();
     }
 
     private GameObject check_if_enemy_in_direction(Vector3 cardinal_direction)

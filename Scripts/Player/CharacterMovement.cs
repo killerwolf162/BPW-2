@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player_movement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
 
     [SerializeField]
@@ -109,16 +109,21 @@ public class Player_movement : MonoBehaviour
             attack_range_highlight.clear_attack_highlight();
         }
             
-        foreach (Vector2Int position in movement_range)
-        {
-            Debug.Log(position);
-        }
+        //foreach (Vector2Int position in movement_range)
+        //{
+        //    Debug.Log(position);
+        //}
     }
 
     private void prepare_movement_range()
     {
-        movement_range = map.get_movement_range(this.selected_unit.transform.position, this.selected_unit.Current_movement_points).Keys.ToList();
+        movement_range = get_movement_range_for(this.selected_unit).Keys.ToList();
         movement_range_highlight.highlight_tiles(movement_range);
+    }
+
+    public Dictionary<Vector2Int, Vector2Int?> get_movement_range_for(Unit selected_unit)
+    {
+        return map.get_movement_range(selected_unit.transform.position, selected_unit.Current_movement_points);
     }
 
     private void prepare_attack_range()

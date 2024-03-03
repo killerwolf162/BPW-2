@@ -138,6 +138,8 @@ MonoBehaviour:
   max_movement_points: 5
   current_movement_points: 0
   attack_range: 1
+  dexterity: 5
+  armour_value: 1
   enemy_detection_layer:
     serializedVersion: 2
     m_Bits: 256
@@ -229,3 +231,5 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   health: 10
+  hitFX: {fileID: 4779731693080456059, guid: ddddc11409e59e14fa6571b6fa16cc01, type: 3}
+  missFX: {fileID: 361566441568871259, guid: fb0a97219969e944dacceedd2b91dd03, type: 3}

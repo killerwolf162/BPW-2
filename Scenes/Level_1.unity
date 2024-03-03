@@ -9660,17 +9660,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2607229652028167984, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
+      propertyPath: enemy_detection_layer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4259273019588147107, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4259273019588147107, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.530256
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4259273019588147107, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5173731
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4259273019588147107, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32220,6 +32224,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6086595208836788318, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
+      propertyPath: dexterity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 328243237776148529, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -32238,7 +32246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5491385049324605104, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5491385049324605104, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32500,7 +32508,7 @@ RectTransform:
   - {fileID: 1417689464}
   - {fileID: 1214438707}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
