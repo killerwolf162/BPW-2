@@ -30,6 +30,8 @@ public class Unit : MonoBehaviour, ITurnDependant
     public int Current_movement_points { get => current_movement_points;}
     public int Attack_range { get => attack_range;}
 
+    public event Action OnMove;
+
     [SerializeField]
     private LayerMask enemy_detection_layer;
 
@@ -61,7 +63,8 @@ public class Unit : MonoBehaviour, ITurnDependant
         if(enemy_unit == null)
         {
             current_movement_points -= move_cost;
-            transform.position += (Vector3)cardinal_direction;
+            transform.position += cardinal_direction;
+            OnMove?.Invoke();
         }
         else
         {

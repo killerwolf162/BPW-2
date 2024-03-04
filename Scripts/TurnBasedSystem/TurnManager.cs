@@ -39,6 +39,7 @@ public class TurnManager : MonoBehaviour
 
     private void player_turn()
     {
+        
         foreach (TurnTaker turn_taker in FindObjectsOfType<TurnTaker>())
         {
             turn_taker.wait_turn();

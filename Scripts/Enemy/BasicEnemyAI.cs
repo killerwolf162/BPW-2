@@ -14,6 +14,9 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
     [SerializeField]
     private FlashFeedback selection_feedback;
 
+    //[SerializeField]
+    //private GameObject target; // assing player as target for AI
+
 
     private void Awake()
     {
@@ -36,10 +39,30 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
         StartCoroutine(move_unit_coroutine(path_queue));
     }
 
-    private List<Vector2Int> get_path_to_random_position(Dictionary<Vector2Int, Vector2Int?> movement_range)
+    private List<Vector2Int> get_path_to_random_position(Dictionary<Vector2Int, Vector2Int?> movement_range) // Use this in Idle/Patrol state
     {
-        Debug.Log(movement_range.Keys.ToList()[2]);
-        return new List<Vector2Int> { movement_range.Keys.ToList()[2] };
+        List<Vector2Int> possible_destination = movement_range.Keys.ToList(); //gives all possible locations unit can move to
+        possible_destination.Remove(Vector2Int.RoundToInt(transform.position)); // removes current possition
+
+        Vector2Int selected_destination = possible_destination[UnityEngine.Random.Range(0, possible_destination.Count)];  //make other variant so this targets the player in chase state
+        List<Vector2Int> list_to_return = get_path_to(selected_destination, movement_range);
+
+        return list_to_return;
+    }
+
+    private List<Vector2Int> get_path_to(Vector2Int destination, Dictionary<Vector2Int, Vector2Int?> movement_range)
+    {
+        List<Vector2Int> path = new List<Vector2Int>();
+
+        path.Add(destination);
+        while(movement_range[destination] != null)
+        {
+            path.Add(movement_range[destination].Value);
+            destination = movement_range[destination].Value;
+        }
+        path.Reverse();
+
+        return path.Skip(1).ToList();
     }
 
     private IEnumerator move_unit_coroutine(Queue<Vector2Int> path)
@@ -63,8 +86,6 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
             yield return new WaitForSeconds(0.5f);
             finished_movement();
         }
-
-
     }
 
     private void finished_movement()
