@@ -9795,7 +9795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259273019588147107, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4259273019588147107, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9833,6 +9833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 6662991620122823609, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
+      propertyPath: selection_feedback
+      value: 
+      objectReference: {fileID: 1868989436}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32349,6 +32353,10 @@ PrefabInstance:
       propertyPath: dexterity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: -6086595208836788318, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
+      propertyPath: max_movement_points
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 328243237776148529, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -32363,11 +32371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5491385049324605104, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.51
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5491385049324605104, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5491385049324605104, guid: dd3d3d263566e9241bbc61e18a62bd65, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32731,6 +32739,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1868989436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1123871983986505042, guid: 5731304d2e6f14c40a88bed63964c404, type: 3}
+  m_PrefabInstance: {fileID: 1289469682}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39f552768ea17d45850856100f43a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1953585369
 GameObject:
   m_ObjectHideFlags: 0

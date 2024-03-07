@@ -207,6 +207,9 @@ MonoBehaviour:
   enemy_detection_layer:
     serializedVersion: 2
     m_Bits: 128
+  ally_detection_layer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &6662991620122823609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +222,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7115c70d2cf9ce344860a8669f4168f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selection_feedback: {fileID: 0}
+  selection_feedback: {fileID: -1123871983986505042}
+  player_detection_layer:
+    serializedVersion: 2
+    m_Bits: 128
+  target: {fileID: 0}
 --- !u!114 &-2937304438553117932
 MonoBehaviour:
   m_ObjectHideFlags: 0

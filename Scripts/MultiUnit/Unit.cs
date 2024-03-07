@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour, ITurnDependant
     public event Action OnMove;
 
     [SerializeField]
-    private LayerMask enemy_detection_layer;
+    private LayerMask enemy_detection_layer, ally_detection_layer;
 
     void Start()
     {
@@ -60,13 +60,19 @@ public class Unit : MonoBehaviour, ITurnDependant
     {
 
         GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
+        //GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
+        //if(ally_unit != null)
+        //{
+        //    Debug.Log("you cant go there");
+        //}
+
         if(enemy_unit == null)
         {
             current_movement_points -= move_cost;
             transform.position += cardinal_direction;
             OnMove?.Invoke();
         }
-        else
+        if(enemy_unit != null)
         {
             int RNG_attacker = Random.Range(1, 10); // attackrol attacker
             int RNG_defender = Random.Range(1, 10); // defencerol defender
@@ -125,4 +131,16 @@ public class Unit : MonoBehaviour, ITurnDependant
         }
         return null;
     }
+
+    private GameObject check_if_ally_in_direction(Vector3 cardinal_direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, cardinal_direction, 1, ally_detection_layer);
+        if (hit.collider != null)
+        {
+            return hit.collider.gameObject;
+        }
+        return null;
+    }
+
+
 }
