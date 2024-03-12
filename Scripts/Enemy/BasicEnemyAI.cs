@@ -8,6 +8,8 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 {
     public event Action turn_finished;
 
+    private Map map;
+
     private Unit unit;
     private CharacterMovement character_movement;
 
@@ -21,6 +23,8 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
     private basic_ai_state state;
 
+    private List<Vector2Int> movement_range;
+
     [SerializeField]
     private GameObject target; // assing player as target for AI
     private Vector3Int player_position;
@@ -29,6 +33,7 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
     private void Awake()
     {
+        map = FindObjectOfType<Map>();
         character_movement = FindObjectOfType<CharacterMovement>();
         unit = GetComponent<Unit>();
         selection_feedback = GetComponent<FlashFeedback>();
@@ -37,6 +42,7 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
     public void start_turn()
     {
+        unit.current_movement_points = unit.max_movement_points;
         if(target == null)
             target = GameObject.FindWithTag("Player");
 
@@ -46,12 +52,12 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
         player_position = Vector3Int.RoundToInt(target.transform.position);
         target_position = (Vector2Int)player_position;
 
-        if (check_if_player_is_in_range() != null)
+        if (check_if_player_is_in_range(target_position) == true)
         {
             Debug.Log("player is in range, chasing");
             state = basic_ai_state.chase;
         }
-        if (check_if_player_is_in_range() == null)
+        if (check_if_player_is_in_range(target_position) == false)
         {
             Debug.Log("player is not in range, wandering");
             state = basic_ai_state.wander;
@@ -83,8 +89,7 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
     private List<Vector2Int> get_path_to_target(Dictionary<Vector2Int, Vector2Int?> movement_range, Vector2Int target_location)
     {
-        List<Vector2Int> possible_destination = movement_range.Keys.ToList(); //gives all possible locations unit can move to
-        possible_destination.Remove(Vector2Int.RoundToInt(transform.position)); // removes current possition
+        List<Vector2Int> possible_destination = check_all_destinations(movement_range);
 
         List<Vector2Int> list_to_return = new List<Vector2Int>();
 
@@ -100,18 +105,24 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
             list_to_return = get_path_to(selected_destination, movement_range);
         }
         return list_to_return;
-        
+
     }
 
     private List<Vector2Int> get_path_to_random_position(Dictionary<Vector2Int, Vector2Int?> movement_range) // Use this in Idle/Patrol state
     {
-        List<Vector2Int> possible_destination = movement_range.Keys.ToList(); //gives all possible locations unit can move to
-        possible_destination.Remove(Vector2Int.RoundToInt(transform.position)); // removes current possition
+        List<Vector2Int> possible_destination = check_all_destinations(movement_range);
 
         Vector2Int selected_destination = possible_destination[UnityEngine.Random.Range(0, possible_destination.Count)];  //make other variant so this targets the player in chase state
         List<Vector2Int> list_to_return = get_path_to(selected_destination, movement_range);
 
         return list_to_return;
+    }
+
+    private List<Vector2Int> check_all_destinations(Dictionary<Vector2Int, Vector2Int?> movement_range)
+    {
+        List<Vector2Int> possible_destination = movement_range.Keys.ToList(); //gives all possible locations unit can move to
+        possible_destination.Remove(Vector2Int.RoundToInt(transform.position)); // removes current possition
+        return possible_destination;
     }
 
     private List<Vector2Int> get_path_to(Vector2Int destination, Dictionary<Vector2Int, Vector2Int?> movement_range)
@@ -128,16 +139,17 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
         return path.Skip(1).ToList();
     }
-    private GameObject check_if_player_is_in_range()
+    bool check_if_player_is_in_range(Vector2Int target)
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 2, new Vector2 (0,0), 5, player_detection_layer);
-        if (hit.collider != null)
-        {
-            return hit.collider.gameObject;
-        }
-        return null;
-    }
+        Dictionary<Vector2Int, Vector2Int?> movement_range = character_movement.get_movement_range_for(unit);
 
+        if (movement_range.ContainsKey(target))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
 
     private IEnumerator move_unit_coroutine(Queue<Vector2Int> path)
     {

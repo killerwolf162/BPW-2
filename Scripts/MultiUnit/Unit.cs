@@ -10,10 +10,10 @@ public class Unit : MonoBehaviour, ITurnDependant
 
 
     [SerializeField]
-    private int max_movement_points = 5;
+    public int max_movement_points = 5;
 
     [SerializeField]
-    private int current_movement_points;
+    public int current_movement_points;
 
     [SerializeField]
     private int attack_range;
@@ -60,11 +60,11 @@ public class Unit : MonoBehaviour, ITurnDependant
     {
 
         GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
-        //GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
-        //if(ally_unit != null)
-        //{
-        //    Debug.Log("you cant go there");
-        //}
+        GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
+        if(ally_unit != null )
+        {
+            Debug.Log($"friendly unit is standing on {cardinal_direction}");
+        }
 
         if(enemy_unit == null)
         {
@@ -134,7 +134,7 @@ public class Unit : MonoBehaviour, ITurnDependant
 
     private GameObject check_if_ally_in_direction(Vector3 cardinal_direction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, cardinal_direction, 1, ally_detection_layer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, cardinal_direction, 0.5f, ally_detection_layer);
         if (hit.collider != null)
         {
             return hit.collider.gameObject;
