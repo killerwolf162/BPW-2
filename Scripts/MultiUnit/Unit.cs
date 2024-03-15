@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour, ITurnDependant
     private int armour_value;
 
 
+
     public int Current_movement_points { get => current_movement_points;}
     public int Attack_range { get => attack_range;}
 
@@ -56,23 +57,25 @@ public class Unit : MonoBehaviour, ITurnDependant
         reset_movement_points();
     }
 
+
     public void handle_movement(Vector3 cardinal_direction, int move_cost)
     {
-
         GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
-        GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
-        if(ally_unit != null )
-        {
-            Debug.Log($"friendly unit is standing on {cardinal_direction}");
-        }
+        //GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
 
-        if(enemy_unit == null)
-        {
-            current_movement_points -= move_cost;
+        //if (ally_unit != null)
+        //{
+        //    Debug.Log("ally unit in the way");
+        //}
+
+        if (enemy_unit == null /*&& ally_unit == null*/)
+        {       
             transform.position += cardinal_direction;
+            current_movement_points -= move_cost;
             OnMove?.Invoke();
         }
-        if(enemy_unit != null)
+
+        else if(enemy_unit != null)
         {
             int RNG_attacker = Random.Range(1, 10); // attackrol attacker
             int RNG_defender = Random.Range(1, 10); // defencerol defender
@@ -129,18 +132,31 @@ public class Unit : MonoBehaviour, ITurnDependant
         {
             return hit.collider.gameObject;
         }
+        else
         return null;
     }
 
     private GameObject check_if_ally_in_direction(Vector3 cardinal_direction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, cardinal_direction, 0.5f, ally_detection_layer);
-        if (hit.collider != null)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2)cardinal_direction, 1, ally_detection_layer);
+        if (hit.collider.gameObject.CompareTag("Enemy"))
         {
             return hit.collider.gameObject;
         }
+        else
         return null;
     }
+    private void OnDrawGizmos()
+    {
+        draw_ray();
+    }
 
-
+    void draw_ray()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawRay(transform.position, Vector2.left);
+        Gizmos.DrawRay(transform.position, Vector2.up);
+        Gizmos.DrawRay(transform.position, Vector2.down);
+        Gizmos.DrawRay(transform.position, Vector2.right);
+    }
 }

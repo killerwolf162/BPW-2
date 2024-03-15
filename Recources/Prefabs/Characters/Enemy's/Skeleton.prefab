@@ -227,6 +227,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   target: {fileID: 0}
+  allies_in_scene: []
+  ally_position: {x: 0, y: 0, z: 0}
+  ally_position_to_remove: {x: 0, y: 0}
 --- !u!114 &-2937304438553117932
 MonoBehaviour:
   m_ObjectHideFlags: 0

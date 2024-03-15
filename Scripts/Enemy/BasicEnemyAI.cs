@@ -30,6 +30,10 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
     private Vector3Int player_position;
     private Vector2Int target_position;
 
+    public GameObject[] allies_in_scene;
+    public Vector3Int ally_position;
+    public Vector2Int ally_position_to_remove;
+
 
     private void Awake()
     {
@@ -37,11 +41,14 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
         character_movement = FindObjectOfType<CharacterMovement>();
         unit = GetComponent<Unit>();
         selection_feedback = GetComponent<FlashFeedback>();
+
+        allies_in_scene = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
 
     public void start_turn()
     {
+
         unit.current_movement_points = unit.max_movement_points;
         if(target == null)
             target = GameObject.FindWithTag("Player");
@@ -98,12 +105,12 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
             Vector2Int selected_destination = target_location;  // If target is in list, moves to target
             list_to_return = get_path_to(selected_destination, movement_range);
         }
-        else // if target is not in the list, moves to random position
-        {
-            Debug.Log("target was not in the list");
-            Vector2Int selected_destination = possible_destination[UnityEngine.Random.Range(0, possible_destination.Count)];
-            list_to_return = get_path_to(selected_destination, movement_range);
-        }
+        //else // if target is not in the list, moves to random position
+        //{
+        //    Debug.Log("target was not in the list");
+        //    Vector2Int selected_destination = possible_destination[UnityEngine.Random.Range(0, possible_destination.Count)];
+        //    list_to_return = get_path_to(selected_destination, movement_range);
+        //}
         return list_to_return;
 
     }
@@ -122,7 +129,20 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
     {
         List<Vector2Int> possible_destination = movement_range.Keys.ToList(); //gives all possible locations unit can move to
         possible_destination.Remove(Vector2Int.RoundToInt(transform.position)); // removes current possition
+
+        cycle_through_ally_positions(possible_destination);
         return possible_destination;
+    }
+
+    private void cycle_through_ally_positions(List<Vector2Int> possible_destination)
+    {
+        foreach (GameObject ally_unit in allies_in_scene)
+        {
+            ally_position = Vector3Int.FloorToInt(ally_unit.transform.position);
+            ally_position_to_remove = (Vector2Int)ally_position;
+            Debug.Log($"Ally is standing on {ally_position_to_remove}");
+            possible_destination.Remove(ally_position_to_remove);
+        }
     }
 
     private List<Vector2Int> get_path_to(Vector2Int destination, Dictionary<Vector2Int, Vector2Int?> movement_range)
@@ -153,26 +173,53 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
     private IEnumerator move_unit_coroutine(Queue<Vector2Int> path)
     {
-        yield return new WaitForSeconds(0.5f);
-        if (unit.can_still_move() == false || path.Count <= 0)
+        float distance = Vector3.Distance(this.transform.position, player_position);
+        if(distance <= 10f)
         {
-            finished_movement();
-            yield break;
+            yield return new WaitForSeconds(0.3f);
+            if (unit.can_still_move() == false || path.Count <= 0)
+            {
+                finished_movement();
+                yield break;
+            }
+            Vector2Int pos = path.Dequeue();
+            Vector3Int direction = Vector3Int.RoundToInt(new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0) - transform.position);
+            unit.handle_movement(direction, 0);
+            yield return new WaitForSeconds(0.3f);
+            if (path.Count > 0)
+            {
+                StartCoroutine(move_unit_coroutine(path));
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.3f);
+                finished_movement();
+            }
         }
-        Vector2Int pos = path.Dequeue();
-        Vector3Int direction = Vector3Int.RoundToInt(new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0) - transform.position);
-        unit.handle_movement(direction, 0);
-        yield return new WaitForSeconds(0.5f);
-        if(path.Count > 0)
+        else if(distance > 15f)
         {
-            StartCoroutine(move_unit_coroutine(path));
+            if (unit.can_still_move() == false || path.Count <= 0)
+            {
+                finished_movement();
+                yield break;
+            }
+            Vector2Int pos = path.Dequeue();
+            Vector3Int direction = Vector3Int.RoundToInt(new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0) - transform.position);
+            unit.handle_movement(direction, 0);
+            if (path.Count > 0)
+            {
+                StartCoroutine(move_unit_coroutine(path));
+            }
+            else
+            {
+                finished_movement();
+            }
         }
-        else
-        {
-            yield return new WaitForSeconds(0.5f);
-            finished_movement();
-        }
+
+
+
     }
+
 
     private void finished_movement()
     {

@@ -133,15 +133,17 @@ public class CharacterMovement : MonoBehaviour
     }
 
 
-    private void reset_character_movement()
+    public void reset_character_movement()
     {
-        movement_range_highlight.clear_highlight();
+        if(movement_range_highlight != null)
+            movement_range_highlight.clear_highlight();
         this.selected_unit = null;
     }
 
-    private void reset_character_attack()
+    public void reset_character_attack()
     {
-        attack_range_highlight.clear_attack_highlight();
+        if (attack_range_highlight != null)
+            attack_range_highlight.clear_attack_highlight();
         this.selected_unit = null;
     }
     

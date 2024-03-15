@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 933931773, guid: c164a57f726017a409a35e3a1e4d04f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -227,6 +227,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   target: {fileID: 0}
+  allies_in_scene: []
+  ally_position: {x: 0, y: 0, z: 0}
+  ally_position_to_remove: {x: 0, y: 0}
 --- !u!114 &-8105944520342780370
 MonoBehaviour:
   m_ObjectHideFlags: 0

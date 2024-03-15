@@ -25,7 +25,7 @@ public class SelectionManager : MonoBehaviour, ITurnDependant
         deselected_old_object();
     }
 
-    private void deselected_old_object()
+    public void deselected_old_object()
     {
         if (flash_feed_back == null)
             return;

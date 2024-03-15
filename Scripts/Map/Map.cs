@@ -8,7 +8,7 @@ public class Map : MonoBehaviour
 {
 
     [SerializeField]
-    private Tilemap floor_tilemap, wall_tilemap;
+    public Tilemap floor_tilemap, wall_tilemap;
 
     private List<Vector2Int> floor_tiles, wall_tiles;
 
@@ -50,7 +50,7 @@ public class Map : MonoBehaviour
        // map_grid.add_to_grid(wall_tilemap.GetComponent<TerrainTypeReference>().get_terrain_data(), wall_tiles);
     }
 
-    private List<Vector2Int> get_world_position_tiles_from(Tilemap tilemap)
+    public List<Vector2Int> get_world_position_tiles_from(Tilemap tilemap)
     {
         List<Vector2Int> temp_list = new List<Vector2Int>();
         foreach (Vector2Int cell_position in tilemap.cellBounds.allPositionsWithin)
