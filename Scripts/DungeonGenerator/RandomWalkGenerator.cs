@@ -14,6 +14,11 @@ public class RandomWalkGenerator : AbstractDungeonGenerator
     [SerializeField]
     public bool start_randomly_each_iteration = true;
 
+    private void Awake()
+    {
+        generate();
+    }
+
     protected override void generate()
     {
         HashSet<Vector2Int> floor_positions = run_random_walk();

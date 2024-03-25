@@ -34,8 +34,7 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
     public Vector3Int ally_position;
     public Vector2Int ally_position_to_remove;
 
-
-    private void Awake()
+     private void Awake()
     {
         map = FindObjectOfType<Map>();
         character_movement = FindObjectOfType<CharacterMovement>();
@@ -44,7 +43,6 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
         allies_in_scene = GameObject.FindGameObjectsWithTag("Enemy");
     }
-
 
     public void start_turn()
     {
@@ -89,7 +87,6 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
             List<Vector2Int> path = get_path_to_random_position(movement_range);
 
             Queue<Vector2Int> path_queue = new Queue<Vector2Int>(path);
-
             StartCoroutine(move_unit_coroutine(path_queue));
         }
     }
@@ -140,7 +137,6 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
         {
             ally_position = Vector3Int.FloorToInt(ally_unit.transform.position);
             ally_position_to_remove = (Vector2Int)ally_position;
-            Debug.Log($"Ally is standing on {ally_position_to_remove}");
             possible_destination.Remove(ally_position_to_remove);
         }
     }
@@ -196,16 +192,18 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
                 finished_movement();
             }
         }
-        else if(distance > 15f)
+        else if(distance > 10f)
         {
             if (unit.can_still_move() == false || path.Count <= 0)
             {
                 finished_movement();
                 yield break;
             }
+
             Vector2Int pos = path.Dequeue();
             Vector3Int direction = Vector3Int.RoundToInt(new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0) - transform.position);
             unit.handle_movement(direction, 0);
+
             if (path.Count > 0)
             {
                 StartCoroutine(move_unit_coroutine(path));
@@ -213,13 +211,12 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
             else
             {
                 finished_movement();
-            }
+            }         
         }
 
 
 
     }
-
 
     private void finished_movement()
     {

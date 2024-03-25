@@ -184,7 +184,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  health: 3
+      - m_Target: {fileID: 3779671496175088138}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: spawn_drops
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  max_health: 3
+  current_health: 0
   hitFX: {fileID: 4779731693080456059, guid: ddddc11409e59e14fa6571b6fa16cc01, type: 3}
   missFX: {fileID: 361566441568871259, guid: fb0a97219969e944dacceedd2b91dd03, type: 3}
 --- !u!114 &-6086595208836788318
@@ -204,6 +217,8 @@ MonoBehaviour:
   attack_range: 1
   dexterity: 5
   armour_value: 0
+  heart: {fileID: 4114738384220545584, guid: 21ab4484365edef489114a70793bba89, type: 3}
+  coin: {fileID: 7384853285632508074, guid: 44df8d7b98dcd0d4aa7c9bf3204cfd4b, type: 3}
   enemy_detection_layer:
     serializedVersion: 2
     m_Bits: 128
