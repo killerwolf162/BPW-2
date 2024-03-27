@@ -29,6 +29,9 @@ public class Unit : MonoBehaviour, ITurnDependant
     public GameObject heart;
     public GameObject coin;
 
+    ScoreManager score_manager;
+    Health player_health;
+
 
 
     public int Current_movement_points { get => current_movement_points;}
@@ -37,10 +40,22 @@ public class Unit : MonoBehaviour, ITurnDependant
     public event Action OnMove;
 
     [SerializeField]
-    private LayerMask enemy_detection_layer, ally_detection_layer;
+    private LayerMask enemy_detection_layer, ally_detection_layer, consumeable_detection_layer;
 
     void Start()
     {
+        if (this.tag == "Player")
+        {
+            player_health = GetComponent<Health>();
+            score_manager = GameObject.Find("Canvas").GetComponent<ScoreManager>();
+        }
+        else
+        {
+            score_manager = null;
+            player_health = null;
+        }
+
+
         reset_movement_points();
         turn_manager = GameObject.Find("Turn_Manager").GetComponent<TurnManager>();
     }
@@ -65,7 +80,25 @@ public class Unit : MonoBehaviour, ITurnDependant
     {
         GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
         GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
+        GameObject consumeable = check_for_consumeable(cardinal_direction);
 
+        if(this.tag == "Player")
+        {
+            if(consumeable != null)
+            { 
+                if (consumeable.tag == "Heart")
+                {
+                    Destroy(consumeable);
+                    score_manager.increase_money();
+                    player_health.current_health = player_health.max_health;
+                }
+                else if (consumeable.tag == "Coin" && consumeable != null)
+                {
+                    Destroy(consumeable);
+                    score_manager.increase_money();
+                }
+            }
+        }
 
         if(enemy_unit != null)
         {
@@ -80,6 +113,8 @@ public class Unit : MonoBehaviour, ITurnDependant
             if (RNG_attacker + dexterity > enemy_unit.GetComponent<Unit>().dexterity + RNG_defender) // if attackrol + dex of attacker is higher than defence rol + dex defender, attack hits
             {
                 perform_attack(enemy_unit.GetComponent<Health>());
+                if (enemy_unit.tag == "Player")
+                    enemy_unit.GetComponent<GetHealth>().decrease_health();
             }
             else if (RNG_attacker + dexterity < enemy_unit.GetComponent<Unit>().dexterity + RNG_defender)
             {
@@ -147,6 +182,18 @@ public class Unit : MonoBehaviour, ITurnDependant
         }
         else
         return null;
+    }
+
+    private GameObject check_for_consumeable(Vector3 cardinal_direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2)cardinal_direction, 1, consumeable_detection_layer);
+        if (hit.collider != null)
+        {
+            Debug.Log("Hit");
+            return hit.collider.gameObject;
+        }
+        else
+            return null;
     }
     private void OnDrawGizmos()
     {
