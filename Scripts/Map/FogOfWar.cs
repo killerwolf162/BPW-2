@@ -13,16 +13,16 @@ public class FogOfWar : MonoBehaviour
     [SerializeField]
     private TileBase fow_tile;
 
-    private void Awake()
+    private void Start()
     {
-        fow_tilemap.size = wall_tilemap.size;
+        fow_tilemap.size = wall_tilemap.size; // makes fow tilemap as large as the whole map
 
-        fow_tilemap.BoxFill(wall_tilemap.cellBounds.min, fow_tile,
+        fow_tilemap.BoxFill(wall_tilemap.cellBounds.min, fow_tile, // paints fow over entire map at start of game
                     wall_tilemap.cellBounds.min.x, wall_tilemap.cellBounds.min.y,
                     wall_tilemap.cellBounds.max.x, wall_tilemap.cellBounds.max.y);
     }
 
-    public void reset_fow(List<Vector2> positions_to_fill)
+    public void reset_fow(List<Vector2> positions_to_fill) // repaints fog of war
     {
         foreach (Vector2 position in positions_to_fill)
         {
@@ -30,7 +30,7 @@ public class FogOfWar : MonoBehaviour
         }
     }
 
-    public void clear_fow(List<Vector2> positions_to_clear)
+    public void clear_fow(List<Vector2> positions_to_clear) // clears fog of war
     {
         foreach (Vector2 position in positions_to_clear)
         {

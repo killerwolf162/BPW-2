@@ -17,10 +17,10 @@ public class PlayerVision : MonoBehaviour
         if (fow == null)
             fow = FindObjectOfType<FogOfWar>();
         reset_positions();
-        unit.OnMove += reset_positions;
+        unit.OnMove += reset_positions; // calls reset FOW everytime onMove is called
     }
 
-    public void reset_positions()
+    public void reset_positions() // clears and re-paints FOW
     {
         List<Vector2> positions_to_clear = calculate_positions_around();
         List<Vector2> positions_to_fill = calculate_positions_away();
@@ -28,7 +28,7 @@ public class PlayerVision : MonoBehaviour
         fow.reset_fow(positions_to_fill);
     }
 
-    private List<Vector2> calculate_positions_away()
+    private List<Vector2> calculate_positions_away() // calculates all positions further than 10 away
     {
         List<Vector2> positions = new List<Vector2>();
         Vector2 center_position = new Vector2(transform.position.x, transform.position.y);
@@ -47,7 +47,9 @@ public class PlayerVision : MonoBehaviour
         return positions;
     }
 
-    private List<Vector2> calculate_positions_around() // make it so that this takes into account that it doesnt reveal map behind walls, no clue how :)
+
+    // make it so that this takes into account that it doesnt reveal map behind walls, no clue how :)
+    private List<Vector2> calculate_positions_around() // calculates all positions in a 10 unit radius
     {
         List<Vector2> positions = new List<Vector2>();
         Vector2 center_position = new Vector2(transform.position.x, transform.position.y);

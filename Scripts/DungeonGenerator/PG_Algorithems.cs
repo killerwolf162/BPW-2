@@ -5,16 +5,16 @@ using UnityEngine;
 public static class PG_Algorithems
 {
  
-    public static HashSet<Vector2Int> simple_random_walk(Vector2Int start_position, int walk_lenght)
+    public static HashSet<Vector2Int> simple_random_walk(Vector2Int start_position, int walk_lenght) // creates hashset with locations
     {
         HashSet<Vector2Int> path = new HashSet<Vector2Int>();
 
-        path.Add(start_position);
+        path.Add(start_position); //starts at start position
         var previous_position = start_position;
 
         for (int i = 0; i < walk_lenght; i++)
         {
-            var new_position = previous_position + Direction2D.get_random_cardinal_direction();
+            var new_position = previous_position + Direction2D.get_random_cardinal_direction(); //moves one tile in a random cardinal direction
             path.Add(new_position);
             previous_position = new_position;
         }

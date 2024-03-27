@@ -5,20 +5,20 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI money_text;
+    [SerializeField] public TextMeshProUGUI score_text;
 
     public int score;
 
     void Start()
     {
-        money_text.text = "Money: " + score;
+        score_text.text = "Score: " + score;
     }
 
 
-    public int increase_money()
+    public int increase_score() // adds score and updates canvas
     {
         score += 1;
-        money_text.text = "Score: " + score;
+        score_text.text = "Score: " + score;
 
         return score;
     }

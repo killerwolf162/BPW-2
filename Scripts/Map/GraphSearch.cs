@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class GraphSearch
 {
-    public static Dictionary<Vector2Int, Vector2Int?> BFS(MapGrid map_graph, Vector2Int start_point, int movement_points)
+    public static Dictionary<Vector2Int, Vector2Int?> BFS(MapGrid map_graph, Vector2Int start_point, int movement_points) //breadth first search algorithm to make a highlight of all possible positions player can move to
     {
         Dictionary<Vector2Int, Vector2Int?> visited_nodes = new Dictionary<Vector2Int, Vector2Int?>();
         Dictionary<Vector2Int, int> cost_so_far = new Dictionary<Vector2Int, int>();
@@ -18,27 +18,27 @@ public static class GraphSearch
         {
 
             Vector2Int current_node = nodes_to_visit_queue.Dequeue();
-            foreach (Vector2Int neighbout_position in map_graph.get_neighbours_for(current_node))
+            foreach (Vector2Int neighbour_position in map_graph.get_neighbours_for(current_node))
             {
-                if (map_graph.check_if_positiion_is_valid(neighbout_position) == false)
+                if (map_graph.check_if_positiion_is_valid(neighbour_position) == false)
                     continue;
 
-                int node_cost = map_graph.get_movement_cost(neighbout_position);
+                int node_cost = map_graph.get_movement_cost(neighbour_position);
                 int current_cost = cost_so_far[current_node];
                 int new_cost = current_cost + node_cost;
 
                 if (new_cost <= movement_points)
                 {
-                    if(!visited_nodes.ContainsKey(neighbout_position))
+                    if(!visited_nodes.ContainsKey(neighbour_position))
                     {
-                        visited_nodes[neighbout_position] = current_node;
-                        cost_so_far[neighbout_position] = new_cost;
-                        nodes_to_visit_queue.Enqueue(neighbout_position);
+                        visited_nodes[neighbour_position] = current_node;
+                        cost_so_far[neighbour_position] = new_cost;
+                        nodes_to_visit_queue.Enqueue(neighbour_position);
                     }
-                    else if (cost_so_far[neighbout_position] > new_cost)
+                    else if (cost_so_far[neighbour_position] > new_cost)
                     {
-                        cost_so_far[neighbout_position] = new_cost;
-                        visited_nodes[neighbout_position] = current_node;
+                        cost_so_far[neighbour_position] = new_cost;
+                        visited_nodes[neighbour_position] = current_node;
                     }
                 }
 

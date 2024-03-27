@@ -20,12 +20,12 @@ public class SelectionManager : MonoBehaviour, ITurnDependant
             flash_feed_back.play_feedback();
     }
 
-    public void wait_turn()
+    public void wait_turn() // deselects player when starting nect turn
     {
         deselected_old_object();
     }
 
-    public void deselected_old_object()
+    public void deselected_old_object() // makes player stop flashing when not selected
     {
         if (flash_feed_back == null)
             return;

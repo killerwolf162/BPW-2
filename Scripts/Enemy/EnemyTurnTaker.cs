@@ -16,7 +16,7 @@ public class EnemyTurnTaker : MonoBehaviour
         enemy_ai.turn_finished += () => turn_finished = true;
     }
 
-    public void take_turn()
+    public void take_turn() // makes player enemy units take their turn
     {
         enemy_ai.start_turn(); ;
     }

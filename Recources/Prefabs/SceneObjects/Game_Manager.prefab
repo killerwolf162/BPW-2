@@ -186,6 +186,50 @@ MonoBehaviour:
   wall_tilemap: {fileID: 0}
   fow_tilemap: {fileID: 0}
   fow_tile: {fileID: 11400000, guid: a1dfbc7a7e7b06445ae2a96bff79d4e5, type: 2}
+--- !u!1 &3386647092851536362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5731193466642631861}
+  - component: {fileID: 7732155741235148192}
+  m_Layer: 0
+  m_Name: Scene_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5731193466642631861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386647092851536362}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6406326862757567869}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7732155741235148192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386647092851536362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c1a91ffad01dc4988b96e5032e1e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3491416627053715627
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +451,7 @@ Transform:
   - {fileID: 5129355803482733264}
   - {fileID: 2923225772855077340}
   - {fileID: 3158504448939013452}
+  - {fileID: 5731193466642631861}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

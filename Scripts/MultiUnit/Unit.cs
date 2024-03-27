@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour, ITurnDependant
     ScoreManager score_manager;
     Health player_health;
 
-
+    private GameObject next_level_pop_up;
 
     public int Current_movement_points { get => current_movement_points;}
     public int Attack_range { get => attack_range;}
@@ -40,10 +40,15 @@ public class Unit : MonoBehaviour, ITurnDependant
     public event Action OnMove;
 
     [SerializeField]
-    private LayerMask enemy_detection_layer, ally_detection_layer, consumeable_detection_layer;
+    private LayerMask enemy_detection_layer, ally_detection_layer, consumeable_detection_layer, staircase_detection_layer;
 
+    private void Awake()
+    {
+        next_level_pop_up = GameObject.FindWithTag("Next_Level_Pop_Up");
+    }
     void Start()
     {
+        next_level_pop_up.SetActive(false);
         if (this.tag == "Player")
         {
             player_health = GetComponent<Health>();
@@ -81,22 +86,28 @@ public class Unit : MonoBehaviour, ITurnDependant
         GameObject enemy_unit = check_if_enemy_in_direction(cardinal_direction);
         GameObject ally_unit = check_if_ally_in_direction(cardinal_direction);
         GameObject consumeable = check_for_consumeable(cardinal_direction);
+        GameObject staircase = check_for_staircase(cardinal_direction);
 
-        if(this.tag == "Player")
+        if (this.tag == "Player") // script shared by player and enemies
         {
             if(consumeable != null)
             { 
                 if (consumeable.tag == "Heart")
                 {
                     Destroy(consumeable);
-                    score_manager.increase_money();
+                    score_manager.increase_score();
                     player_health.current_health = player_health.max_health;
                 }
-                else if (consumeable.tag == "Coin" && consumeable != null)
+                else if (consumeable.tag == "Coin") // destroys coin and adds score 
                 {
                     Destroy(consumeable);
-                    score_manager.increase_money();
+                    score_manager.increase_score();
                 }
+            }
+            if(staircase != null) // creates pop-up when you move over the staircase
+            {
+                Debug.Log("staircase called");
+                next_level_pop_up.SetActive(true);
             }
         }
 
@@ -122,13 +133,13 @@ public class Unit : MonoBehaviour, ITurnDependant
             }
             current_movement_points = 0;
         }
-        if (enemy_unit == null && ally_unit == null)
+        if (enemy_unit == null && ally_unit == null) // checks if positions to move to doesnt have an enemy or ally in it
         {
             transform.position += cardinal_direction;
             current_movement_points -= move_cost;
             OnMove?.Invoke();
         }
-        if (ally_unit != null)
+        if (ally_unit != null) //if trying to move into an ally, set movement to 0
         {
             Debug.Log("ally unit in the way");
             current_movement_points = 0;
@@ -144,6 +155,8 @@ public class Unit : MonoBehaviour, ITurnDependant
     {
         SceneManager.LoadScene("Game_Over");
     }
+
+
 
     // eventually change to an attack window where player can choose different weapons to perform attack with if player has these weapons
     // player then chooses weapon, weapon range will be highlighted.
@@ -187,6 +200,18 @@ public class Unit : MonoBehaviour, ITurnDependant
     private GameObject check_for_consumeable(Vector3 cardinal_direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2)cardinal_direction, 1, consumeable_detection_layer);
+        if (hit.collider != null)
+        {
+            Debug.Log("Hit");
+            return hit.collider.gameObject;
+        }
+        else
+            return null;
+    }
+
+    private GameObject check_for_staircase(Vector3 cardinal_direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Vector2)cardinal_direction, 1, staircase_detection_layer);
         if (hit.collider != null)
         {
             Debug.Log("Hit");

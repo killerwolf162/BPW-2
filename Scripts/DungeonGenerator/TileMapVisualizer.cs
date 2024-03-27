@@ -11,12 +11,12 @@ public class TileMapVisualizer : MonoBehaviour
     [SerializeField]
     private TileBase floor_tile, wall_tile;
 
-    public void paint_floor_tiles(IEnumerable<Vector2Int> floor_positions)
+    public void paint_floor_tiles(IEnumerable<Vector2Int> floor_positions) // paints floor tilemap
     {
         paint_floor_tiles(floor_positions, floor_tile_map, floor_tile);
     }
 
-    internal void paint_single_basic_wall(Vector2Int position)
+    internal void paint_single_basic_wall(Vector2Int position) // paints wall tile
     {
         paint_tile(wall_tile_map, wall_tile, position);
     }
@@ -29,13 +29,13 @@ public class TileMapVisualizer : MonoBehaviour
         }
     }
 
-    private void paint_tile(Tilemap floor_tile_map, TileBase floor_tile, Vector2Int position)
+    private void paint_tile(Tilemap floor_tile_map, TileBase floor_tile, Vector2Int position) // paints single floor tile
     {
         var tile_position = floor_tile_map.WorldToCell((Vector3Int)position);
         floor_tile_map.SetTile(tile_position, floor_tile);
     }
 
-    public void Clear()
+    public void Clear() // clears floor tile
     {
         floor_tile_map.ClearAllTiles();
         wall_tile_map.ClearAllTiles();

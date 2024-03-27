@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
     {
         current_health = max_health;
     }
-    public void get_hit(int damage)
+    public void get_hit(int damage) //when hit takes damage and creates hit FX
     {
         current_health -= damage;
         Debug.Log(gameObject.name + " health is " + current_health);
@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
 
     }
 
-    public void dodge_attack()
+    public void dodge_attack() //creates dodge/miss FX
     {
         Debug.Log(gameObject.name + "dodged the attack");
         Instantiate(missFX, transform.position, Quaternion.identity);
@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
 
     public void spawn_drops()
     {
-        int RNG = Random.Range(0, 100);
+        int RNG = Random.Range(0, 100); //determines if enemy drops coin or heart when defeated
         if(RNG < 65)
             Instantiate(this.GetComponent<Unit>().coin, this.transform.position, this.transform.rotation);
         else if( RNG >= 65)

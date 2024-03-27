@@ -27,7 +27,7 @@ public class RandomWalkGenerator : AbstractDungeonGenerator
         WallGenerator.create_walls(floor_positions, tile_map_visualizer);
     }
 
-    protected HashSet<Vector2Int> run_random_walk()
+    protected HashSet<Vector2Int> run_random_walk() // runs walk generator
     {
         var current_position = start_position;
         HashSet<Vector2Int> floor_positions = new HashSet<Vector2Int>();
@@ -38,7 +38,7 @@ public class RandomWalkGenerator : AbstractDungeonGenerator
             floor_positions.UnionWith(path);
 
             if (start_randomly_each_iteration)
-                current_position = floor_positions.ElementAt(Random.Range(0, floor_positions.Count));
+                current_position = floor_positions.ElementAt(Random.Range(0, floor_positions.Count)); //starts at random location in floor positions each iteration
         }
         return floor_positions;
     }

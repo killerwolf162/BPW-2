@@ -13,10 +13,10 @@ public class AttackRangeHighlight : MonoBehaviour
 
     public void clear_attack_highlight()
     {
-        attack_highlight_tilemap.ClearAllTiles();
+        attack_highlight_tilemap.ClearAllTiles(); // clears attack highlight
     }
 
-    public void highlight_attack_tiles(IEnumerable<Vector2Int> cell_positions)
+    public void highlight_attack_tiles(IEnumerable<Vector2Int> cell_positions) // creates a highlight for the areas the player can attack
     {
         clear_attack_highlight();
         foreach (Vector2Int tile_position in cell_positions)

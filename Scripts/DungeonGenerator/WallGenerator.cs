@@ -21,7 +21,7 @@ public static class WallGenerator
             foreach (var direction in direction_list)
             {
                 var neighbour_position = position + direction;
-                if (floor_positions.Contains(neighbour_position) == false)
+                if (floor_positions.Contains(neighbour_position) == false) // checks if floortiles has a neighbouring floortile in all directions, if false adds position to wall hashset
                     wall_positions.Add(neighbour_position);
             }
         }

@@ -13,7 +13,7 @@ public class TurnManager : MonoBehaviour
     public void next_turn()
     {
         Debug.Log("Waiting..");
-        on_block_player_input?.Invoke();
+        on_block_player_input?.Invoke(); // blocks player input when ending turn
 
         enemy_turn();
     }
@@ -24,7 +24,7 @@ public class TurnManager : MonoBehaviour
         StartCoroutine(enemy_take_turn(enemy_queue));
     }
 
-    private IEnumerator enemy_take_turn(Queue<EnemyTurnTaker> enemy_queue)
+    private IEnumerator enemy_take_turn(Queue<EnemyTurnTaker> enemy_queue) //
     {
         while (enemy_queue.Count > 0)
         {
@@ -37,7 +37,7 @@ public class TurnManager : MonoBehaviour
         player_turn();
     }
 
-    private void player_turn()
+    private void player_turn()// starts player turn
     {
         
         foreach (TurnTaker turn_taker in FindObjectsOfType<TurnTaker>())

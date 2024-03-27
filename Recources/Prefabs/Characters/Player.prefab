@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -837693244, guid: a4430b31f49050843a32f29cbb2ae703, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,7 +152,10 @@ MonoBehaviour:
     m_Bits: 0
   consumeable_detection_layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  staircase_detection_layer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &1874649107644899115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f987e501748e88429cca9c55b0a8bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 8
+  range: 6
 --- !u!114 &3421041181623377455
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGrid
+public class MapGrid 
 {
 
     Dictionary<Vector2Int, TerrainData> grid = new Dictionary<Vector2Int, TerrainData>();
@@ -30,7 +30,7 @@ public class MapGrid
         return grid[tile_world_position].movement_cost;
     }
 
-    public List<Vector2Int> get_neighbours_for(Vector2Int tile_world_position)
+    public List<Vector2Int> get_neighbours_for(Vector2Int tile_world_position) //used in BFS and check if position is walkable
     {
         List<Vector2Int> positions = new List<Vector2Int>();
 

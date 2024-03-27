@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class AbstractDungeonGenerator : MonoBehaviour
 {
+    //Abstract class for dungeon generators
 
     [SerializeField]
     protected TileMapVisualizer tile_map_visualizer = null;

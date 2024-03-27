@@ -48,29 +48,27 @@ public class SpawnEnemies : MonoBehaviour
 
         foreach (GameObject enemy in enemy1_list)
         {
-            int index;
-            Vector3Int spawn_location;
-
-            generate_random_spawn_location(out index, out spawn_location);
-
-            Instantiate(enemy, spawn_location + new Vector3(0.5f, 0.5f), transform.rotation);
-
-            possible_spawn_locations.RemoveAt(index); // removes spawn location from list of possible spawn locations
+            create_enemy(enemy); 
         }
 
         foreach (GameObject enemy in enemy2_list)
         {
-            int index;
-            Vector3Int spawn_location;
-
-            generate_random_spawn_location(out index, out spawn_location);
-
-            Instantiate(enemy, spawn_location + new Vector3(0.5f, 0.5f), transform.rotation);
-
-            possible_spawn_locations.RemoveAt(index);
+            create_enemy(enemy);
         }
 
 
+    }
+
+    private void create_enemy(GameObject enemy)
+    {
+        int index;
+        Vector3Int spawn_location;
+
+        generate_random_spawn_location(out index, out spawn_location);
+
+        Instantiate(enemy, spawn_location + new Vector3(0.5f, 0.5f), transform.rotation);
+
+        possible_spawn_locations.RemoveAt(index);// removes spawn location from list of possible spawn locations
     }
 
     private void generate_random_spawn_location(out int index, out Vector3Int spawn_location) // picks random spot on map to set as spawn location
@@ -80,7 +78,7 @@ public class SpawnEnemies : MonoBehaviour
         spawn_location = (Vector3Int)possible_spawn_locations[index];
     }
 
-    private List<Vector2Int> add_spawn_locations(List<Vector2Int> input_list, int count) // creates list for all possible spawn locations
+    private List<Vector2Int> add_spawn_locations(List<Vector2Int> input_list, int count) // creates list with possible spawn locations
     {
         List<Vector2Int> output_list = new List<Vector2Int>();
         for (int i = 0; i <= count; i++)

@@ -5,9 +5,9 @@ using UnityEngine;
 
 
 [CustomEditor(typeof(AbstractDungeonGenerator), true)]
-public class RGD_editor : Editor
+public class RDGeditor : Editor
 {
-
+    //Custom editor created to generate/clear dungeons from scene view
 
     AbstractDungeonGenerator generator;
 

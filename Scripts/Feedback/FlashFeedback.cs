@@ -17,7 +17,7 @@ public class FlashFeedback : MonoBehaviour
         StartCoroutine(flash_coroutine());
     }
 
-    private IEnumerator flash_coroutine()
+    private IEnumerator flash_coroutine() //turns sprite renderer on and of at intervals
     {
         Color sprite_color = sprite_renderer.color;
         sprite_color.a = 0;
@@ -30,7 +30,7 @@ public class FlashFeedback : MonoBehaviour
         StartCoroutine(flash_coroutine());
     }
 
-    public void stop_feedback()
+    public void stop_feedback() //stop sprite renderer from turning on and off again
     {
         StopAllCoroutines();
         Color sprite_color = sprite_renderer.color;
