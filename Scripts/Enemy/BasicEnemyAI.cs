@@ -46,7 +46,7 @@ public class BasicEnemyAI : MonoBehaviour, IenemyAI
 
     public void start_turn()
     {
-
+        allies_in_scene = GameObject.FindGameObjectsWithTag("Enemy");
         unit.current_movement_points = unit.max_movement_points;
         if(target == null)
             target = GameObject.FindWithTag("Player");
